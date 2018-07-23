@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
-import { HTTP_PROVIDERS} from '@angular/http';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 import { AboutComponent } from './+about/index';
 import { HomeComponent } from './+home/index';
-import { SearchComponent } from './+search/index';
-import { EditComponent } from './+edit/index';
 
-import { NameListService, NavbarComponent, ToolbarComponent, SearchService } from './shared/index';
+import { NavbarComponent, ToolbarComponent } from './shared/index';
 
 import * as Services from './services/index';
 
@@ -18,14 +16,12 @@ import * as Services from './services/index';
 @Component({
   moduleId: module.id,
   selector: 'sd-app',
-  viewProviders: [NameListService, SearchService, HTTP_PROVIDERS, Services.HttpInterceptor, Services.SearchEngineService],
+  viewProviders: [HTTP_PROVIDERS, Services.HttpInterceptor, Services.SearchEngineService],
   templateUrl: 'app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
 @Routes([
   { path: '/', component: HomeComponent },
-  { path: '/about', component: AboutComponent },
-  { path: '/search', component: SearchComponent },
-  { path: '/edit/:id', component: EditComponent }
+  { path: '/about', component: AboutComponent }
 ])
-export class AppComponent {}
+export class AppComponent { }

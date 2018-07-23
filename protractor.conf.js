@@ -17,7 +17,7 @@ const config = {
     showColors: true,
     isVerbose: false,
     includeStackTrace: false,
-    // defaultTimeoutInterval: 400000
+    defaultTimeoutInterval: 400000
   },
 
   directConnect: true,

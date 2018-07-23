@@ -10,7 +10,7 @@ if (!TASK) {
 }
 
 console.log('**********************');
-console.log('* angular2-seed tools ');
+console.log('* q-search tools ');
 console.log('* debugging task:', TASK);
 console.log('**********************');
 
