@@ -1,0 +1,100 @@
+<div class="container">
+  <br>
+  <div class="row result-section">
+    <!-- Example single danger button -->
+    <div class="btn-group">
+      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ selectedSearchEngine.value }}
+      </button>
+      <div class="dropdown-menu">
+        <li *ngFor="let item of searchEngineTypes" [attr.id]="item.id" [value]="item.value" class="dropdown-item" (click)="onSearchEngineChanged(item, searchString.value)">{{item.value}}</li>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="input-group active-cyan">
+        <input class="form-control" id="iconLeft" #searchString type="text" (keyup.enter)="Search(searchString.value)" placeholder="Search...">
+        <span class="input-group-btn" (click)="Search(searchString.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row result-section">
+
+    <!-- Search Results -->
+    <div class="col-md-7" *ngIf="searchCallCompleted">
+      <div *ngIf="HasSearchResults()">
+        <div class="text-success"> About {{SearchData.searchInformation.formattedTotalResults}} results ({{SearchData.searchInformation.formattedSearchTime}}
+          seconds)
+        </div>
+        &nbsp;
+        <div *ngFor='let value of SearchData.items; trackBy: index;'>
+          <div id="{{ value.id }}">
+            <h5 [innerHTML]="value.htmlTitle || value.title"></h5>
+            <span class="" [innerHTML]="value.htmlSnippet"></span>
+            <a target="_blank" href="{{value.link}}">{{value.link}}</a>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <!-- <ng-template #showNoResult>
+        <div class="col-md-7 text-danger">
+          Sorry, No results found matching that search text.
+        </div>
+      </ng-template> -->
+
+    </div>
+    <!-- <ng-template #elseBlock> -->
+      <!-- <img class="img-fluid" alt="Responsive image" width="100%" height="100%" src="../assets/start.jpg"> -->
+      <!-- <div class="col-md-7 text-information">
+        To see search results , Start your quest by typing the query above....
+      </div> -->
+    <!-- </ng-template> -->
+
+    <!-- Search Results ends-->
+
+    <!-- Search Results logging-->
+    <div class="col-md-5">
+      <h5>Search History</h5>
+      <div class="table-responsive-ss">
+        <table class="table table-sm table-dark">
+          <thead class="thead-light">
+            <tr class="table-info">
+              <th scope="col">Search Engine</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">Search delay</th>
+              <th scope="col">Total Results</th>
+              <th scope="col">Search term</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let item of GetSelectedSearchEngineStats(); trackBy: index;'>
+              <td>
+                <span>{{item.browser || 'NA'}} </span>
+              </td>
+              <td>
+                <span>{{item.timeStamp || 'NA' }} </span>
+              </td>
+              <td>
+                <span>{{item.searchInformation.formattedSearchTime || 'NA' }} secs </span>
+              </td>
+              <td>
+                <span>{{item.searchInformation.formattedTotalResults || 'NA'}} </span>
+              </td>
+              <td>
+                <span>{{item.searchText}} </span>
+              </td>
+            </tr>
+            <tr *ngIf="!GetSelectedSearchEngineStats()">
+              <td colspan="4">No search history available.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Search Results logging ends-->
+  </div>
+</div>
