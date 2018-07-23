@@ -97,8 +97,10 @@ body, html {
       color: #4dd0e1;
   }
 
+  .fa:hover,a:hover,li:hover {
+    cursor: pointer;
+}
 
-
-  .fa:hover {
-      cursor: pointer;
-  }
+.input-group-btn{
+  font-size: 1.6em;
+}
