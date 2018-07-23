@@ -29,6 +29,7 @@ export class HomeComponent {
   public selectedSearchEngine: KeyValuePair;
   public searchCallCompleted: Boolean;
   public searchEngineTypes: Array<KeyValuePair>;
+  public errorMessage: string;
 
   constructor(private searchEngineService: Services.SearchEngineService) {
     this.searchEngineTypes = searchEngineTypeMetaData;
@@ -47,6 +48,7 @@ export class HomeComponent {
 
       this.searchCallCompleted = false;
       this.SearchData = null;
+      this.errorMessage = '';
 
       switch (this.selectedSearchEngine.id) {
         case 0: this.fireSearch(this.searchEngineService.GetGoogleResults, queryString.trim());
@@ -82,19 +84,37 @@ export class HomeComponent {
 
   private fireSearch = (apiMethod: Function, queryString: string) => {
 
-    apiMethod(queryString).subscribe((response: Response) => {
-      this.SearchData = this.mapResponse(response);
-      this.logSearchStasticsInLocalStorage(this.SearchData, this.selectedSearchEngine.id, queryString);
-      this.searchCallCompleted = true;
-    }, (error: any) => {
-      console.log('error', error);
-      this.searchCallCompleted = true;
-    });
+    apiMethod(queryString).subscribe(
+      (response: Response) => { this.onSearchOk(response, queryString); },
+      (error: Error) => { this.onSearchNok(error); }
+    );
 
   }
 
+  private onSearchOk = (response: Response, queryString: string) => {
+    let data = response.json();
+    let mappedResponse = data && this.mapResponse(data);
+
+    if (response.status === 200 && mappedResponse) {
+      this.SearchData = mappedResponse;
+      this.logSearchStasticsInLocalStorage(this.SearchData, this.selectedSearchEngine.id, queryString);
+      if (!mappedResponse.items || !mappedResponse.items.length) {
+        this.errorMessage = 'Sorry, No results found matching that search text.';
+      }
+    } else {
+      this.errorMessage = 'Sorry, No results found matching that search text.';
+    }
+    this.searchCallCompleted = true;
+  }
+
+  private onSearchNok = (error: any) => {
+    this.errorMessage = 'Unable to process your request at the moment, sorry for the inconvenience.'
+    console.log('error', error);
+    this.searchCallCompleted = true;
+  }
+
   private mapResponse = (response: any): SearchResult => {
-    const data = response.json();
+    const data = response;
 
     switch (this.selectedSearchEngine.id) {
       case 0: return data;
