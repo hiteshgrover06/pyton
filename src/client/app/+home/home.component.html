@@ -1,5 +1,5 @@
-<div class="">
-  <div class="col-md-9 result-section">
+<div class="container">
+  <div class="col-md-12 result-section">
     <div class="btn-group">
       <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ selectedSearchEngine.value }}
@@ -17,7 +17,7 @@
   </div>
 
   <!-- Search Results -->
-  <div class="col-md-9 result-section">
+  <div class="col-md-12 result-section">
     <div *ngIf="HasSearchResults()">
       <div class="text-success"> About {{SearchData.searchInformation.formattedTotalResults}} results ({{SearchData.searchInformation.formattedSearchTime}}
         seconds)
@@ -68,7 +68,7 @@
   <!-- Search Results ends-->
 
   <!-- Search Results logging-->
-  <div class="col-md-9 result-section">
+  <div class="col-md-12 result-section">
     <h5>Search History</h5>
     <div class="table-responsive">
       <table class="table table-sm table-dark">
