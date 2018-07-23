@@ -1,25 +1,31 @@
 describe('Home', () => {
 
-  beforeEach( () => {
+  beforeEach(() => {
     browser.get('/');
   });
 
-  it('should have an input', () => {
-    expect(element(by.css('sd-home form input')).isPresent()).toEqual(true);
+  it('should have fields visible', () => {
+    expect(element(by.css('input[type="text"]')).isPresent()).toEqual(true);
+
+    expect(element(by.css('.dropdown-menu')).isPresent()).toEqual(true);
+    expect(element(by.css('button[type="button"]')).getText())
+      .toEqual('Google Search');
+
+    expect(element(by.css('div.alert-info')).isPresent()).toEqual(true);
+    expect(element(by.css('div.alert-info')).getText())
+      .toEqual('To see search results , Start your quest by typing the query above....');
+
+    expect(element(by.css('div.table-responsive')).isPresent()).toEqual(true);
   });
 
-  it('should have a list of computer scientists', () => {
-    expect(element(by.css('sd-home ul')).getText())
-      .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper');
-  });
+  // it('should show results on api call', () => {
 
-  it('should add a name to the list using the form', () => {
-    let input = element(by.css('sd-home form input'));
-    'Tim Berners-Lee'.split('').forEach((c) => input.sendKeys(c));
-    element(by.css('sd-home form button')).click();
+  //   expect(element(by.css('table-responsive')).isPresent()).toEqual(true);
 
-    expect(element(by.css('sd-home ul')).getText())
-      .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper\nTim Berners-Lee');
-  });
+  //   let input = element(by.css('sd-home form input'));
+  //   'Tim Berners-Lee'.split('').forEach((c) => input.sendKeys(c));
+  //   element(by.css('sd-home form button')).click();
+
+  // });
 
 });

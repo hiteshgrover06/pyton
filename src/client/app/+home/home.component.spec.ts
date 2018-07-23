@@ -28,7 +28,7 @@ export function main() {
             let homeInstance = <HomeComponent>rootTC.debugElement.children[0].componentInstance;
 
             expect(homeInstance.searchEngineTypes.length).toEqual(3);
-            expect(homeInstance.selectedSearchEngine).toEqual('0');
+            expect(homeInstance.selectedSearchEngine).toEqual({ id: 0, value: 'Google Search' });
           });
       }));
 
@@ -40,11 +40,11 @@ export function main() {
 
             let homeInstance = <HomeComponent>rootTC.debugElement.children[0].componentInstance;
 
-            expect(homeInstance.selectedSearchEngine).toEqual('0');
+            expect(homeInstance.selectedSearchEngine).toEqual({ id: 0, value: 'Google Search' });
 
             homeInstance.onSearchEngineChanged(homeInstance.searchEngineTypes[1], '');
 
-            expect(homeInstance.selectedSearchEngine).toEqual('1');
+            expect(homeInstance.selectedSearchEngine).toEqual(({ id: 1, value: 'Bing Search' }));
           });
       }));
   });

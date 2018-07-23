@@ -20,12 +20,12 @@ export function main() {
     beforeEachProviders(() => [ROUTER_FAKE_PROVIDERS]);
 
     it('should build without a problem',
-       async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-         tcb.createAsync(TestComponent)
-             .then((fixture) => {
-               expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
-             });
-       })));
+      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        tcb.createAsync(TestComponent)
+          .then((fixture) => {
+            expect(fixture.nativeElement.innerText.indexOf('HOME')).toEqual(9);
+          });
+      })));
   });
 }
 
@@ -34,4 +34,4 @@ export function main() {
   template: '<sd-app></sd-app>',
   directives: [AppComponent]
 })
-class TestComponent {}
+class TestComponent { }

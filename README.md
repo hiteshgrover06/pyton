@@ -115,7 +115,7 @@ npm run webdriver-start
 npm run serve.e2e
 npm run e2e
 
-webdriver-manager update
+webdriver-manager update # only first time
 webdriver-manager start
 npm run serve.e2e
 protractor .\protractor.conf.js

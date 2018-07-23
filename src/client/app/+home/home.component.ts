@@ -108,7 +108,7 @@ export class HomeComponent {
   }
 
   private onSearchNok = (error: any) => {
-    this.errorMessage = 'Unable to process your request at the moment, sorry for the inconvenience.'
+    this.errorMessage = 'Unable to process your request at the moment, sorry for the inconvenience.';
     console.log('error', error);
     this.searchCallCompleted = true;
   }
