@@ -1,15 +1,52 @@
-<p>
-  Angular 2 Seed is a starter project that implements best practices in
-  coding, building and testing Angular 2 apps.
-<p>
+<div class="container">
+  <div class="col-md-12 result-section">
+    <h3>Thought Process</h3>
+    <p>The idea was to first understand the scenario and time scope the implementation.</p>
+    <p>So, I went through by solving the following questions and empathizing the needs of the user.</p>
+    <p><b>Initial design &mdash;</b></p>
+    <ul>
+      <li>Look for a simple and clear design for the user and is intuitive and friendly.</li>
+      <li>Which APIs can be utilized.</li>
+      <li>Understand the api documentation so that its possible to make a REST call from the application. (This takes a bit of
+        time as the documentation and the process varies per engine).</li>
+      <li>Create an interceptor (common component) for making api calls and a service that can be utilized to integrate the API.</li>
+      <li>Start with a single api integration and handle the results mapping for google API.</li>
+      <li>Logging the whole search object that be utilized for history and later in future can be utilized to handle the cache
+        response mechanisim either in database / session / localStorage.
+      </li>
+      <li>Show the relevant information based on user search , i.e to show content and the history</li>
+    </ul>
+    <br>
+    <hr>
+    <p><b>Extended the learnings &mdash;</b></p>
+    <p>After the api was integrated and have basic structure in place, and bindings done. Thought about the integration of Bing
+      search api.</p>
+    <ul>
+      <li>Every browser has its own response , So have mapped the response so that every engine finally has a single view. This
+        way the application is scalable to different search engines and can actually be an integrated search web application.</li>
+      <li>Once the positive scenarios were handled , added the edge cases and error case handling mechanism to clearly indicate
+        the use with the feedback.</li>
+      <li>Added the pagination code to handle the next and previous page search result calls ,as beta version to showcase the
+        possibility we can have as future.
+      </li>
+      <li>Refactored the UI design after the final changes.</li>
+    </ul>
+    <br>
+    <hr>
+    <p><b>Testing &mdash;</b></p>
+    <p>Later worked on setting up the test structure and dependencies</p>
+    <ul>
+      <li>Added the unit test cases and e2e test cases that cover the basic idea of doing the functional testing.</li>
+    </ul>
+    <br>
+    <hr>
+    <p><b>Some Backlog items &mdash;</b></p>
+    <p>Have the logging in place that can be integrated with a backend / session /localStorage to handle the cached responses
+      based on the search term.</p>
+    <p>The logging object is design in a way to identify the &ldquo;Search engine&rdquo; , &ldquo;Search query&rdquo; &nbsp;and
+      &ldquo;ResultData&rdquo; that can be enriched and made smart.</p>
+    <br>
+    <hr>
 
-<h2>Features</h2>
-<ul>
-  <li>Ready to go, statically typed build system using Gulp for working with TypeScript.</li>
-  <li>Production and development builds.</li>
-  <li>Sample unit tests with Jasmine and Karma including code coverage via Istanbul.</li>
-  <li>End-to-end tests with Protractor.</li>
-  <li>Development server with live reload.</li>
-  <li>TypeScript definition management using Typings.</li>
-  <li>Basic Service Worker, which implements "Cache then network strategy".</li>
-</ul>
+  </div>
+</div>
