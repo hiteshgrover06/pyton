@@ -6,9 +6,9 @@ import { Response } from '@angular/http';
 import * as Services from '../services/index';
 
 const searchEngineTypeMetaData = [
-  { id: 0, value: 'Google Search' },
-  { id: 1, value: 'Bing Search' },
-  { id: 2, value: 'Yahoo Search' }
+  { id: 0, value: 'Google Search', isUnderProgress: false },
+  { id: 1, value: 'Bing Search', isUnderProgress: false },
+  { id: 2, value: 'Yahoo Search', isUnderProgress: true }
 ];
 
 const numberOfRecordsPerPage: number = 10;

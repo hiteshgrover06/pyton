@@ -66,10 +66,6 @@ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 
 A documentation of the provided tools can be found in [tools/README.md](tools/README.md).
 
-# How to extend?
-
-Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the project.
-
 # Running tests
 
 ```bash

@@ -5,7 +5,10 @@
         {{ selectedSearchEngine.value }}
       </button>
       <div class="dropdown-menu">
-        <li *ngFor="let item of searchEngineTypes" [attr.id]="item.id" [value]="item.value" class="dropdown-item" (click)="onSearchEngineChanged(item, searchString.value)">{{item.value}}</li>
+        <li *ngFor="let item of searchEngineTypes" [attr.id]="item.id" [value]="item.value" class="dropdown-item" (click)="onSearchEngineChanged(item, searchString.value)">
+          <i *ngIf="item.isUnderProgress" class="fa fa-ban" aria-hidden="true"></i>
+          <span>{{item.value}}</span>
+        </li>
       </div>
     </div>
     <div class="input-group active-cyan">
