@@ -31,7 +31,7 @@ npm start
 You should see a screen like the one below at http://localhost:5555.
 
 
-# Though Process go to path http://localhost:5555/about. or click the navbar item to navigate
+== For Idealization Process go to path http://localhost:5555/about. or click the navbar item to navigate
 
 
 # Running tests
