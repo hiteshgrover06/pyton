@@ -11,6 +11,8 @@ const searchEngineTypeMetaData = [
   { id: 2, value: 'Yahoo Search' }
 ];
 
+const numberOfRecordsPerPage: number = 10;
+
 /**
  * This class represents the lazy loaded HomeComponent.
  */
@@ -30,10 +32,12 @@ export class HomeComponent {
   public searchCallCompleted: Boolean;
   public searchEngineTypes: Array<KeyValuePair>;
   public errorMessage: string;
+  public currentPage: number;
 
   constructor(private searchEngineService: Services.SearchEngineService) {
     this.searchEngineTypes = searchEngineTypeMetaData;
     this.selectedSearchEngine = searchEngineTypeMetaData[0];
+    this.currentPage = 0;
   }
 
   public onSearchEngineChanged = (item: KeyValuePair, searchText: string) => {
@@ -43,20 +47,34 @@ export class HomeComponent {
     }
   }
 
-  public Search = (queryString: string) => {
+  public OnNextClicked = (searchText: string) => {
+    this.currentPage += 1;
+    let nextPageOffset = this.currentPage * numberOfRecordsPerPage + 1;
+    this.Search(searchText, nextPageOffset);
+  }
+
+  public OnPreviousClicked = (searchText: string) => {
+    this.currentPage -= 1;
+    let nextPageOffset = this.currentPage * numberOfRecordsPerPage + 1;
+    this.Search(searchText, nextPageOffset);
+  }
+
+  public Search = (queryString: string, offset?: number) => {
     if (queryString.trim()) {
 
       this.searchCallCompleted = false;
       this.SearchData = null;
       this.errorMessage = '';
-
+      if (!offset) {
+        this.currentPage = 0;
+      }
       switch (this.selectedSearchEngine.id) {
-        case 0: this.fireSearch(this.searchEngineService.GetGoogleResults, queryString.trim());
+        case 0: this.fireSearch(this.searchEngineService.GetGoogleResults, queryString.trim(), offset);
           break;
-        case 1: this.fireSearch(this.searchEngineService.GetBingResults, queryString.trim());
+        case 1: this.fireSearch(this.searchEngineService.GetBingResults, queryString.trim(), offset);
           break;
 
-        default: this.fireSearch(this.searchEngineService.GetGoogleResults, queryString.trim());
+        default: this.fireSearch(this.searchEngineService.GetGoogleResults, queryString.trim(), offset);
           break;
       }
     }
@@ -82,9 +100,9 @@ export class HomeComponent {
       { searchText }, { browser: this.selectedSearchEngine.value }, { timeStamp: new Date().toUTCString() }));
   }
 
-  private fireSearch = (apiMethod: Function, queryString: string) => {
+  private fireSearch = (apiMethod: Function, queryString: string, offset: number) => {
 
-    apiMethod(queryString).subscribe(
+    apiMethod(queryString, offset).subscribe(
       (response: Response) => { this.onSearchOk(response, queryString); },
       (error: Error) => { this.onSearchNok(error); }
     );
@@ -126,7 +144,8 @@ export class HomeComponent {
 
   private mapBingSearchData(data: any): SearchResult {
     const searchInformation: SearchInformation = {
-      formattedTotalResults: data.webPages && data.webPages.totalEstimatedMatches
+      formattedTotalResults: data.webPages && data.webPages.totalEstimatedMatches,
+      totalResults: data.webPages && data.webPages.totalEstimatedMatches,
     };
 
     const items: Array<Item> = [];

@@ -80,7 +80,8 @@ body, html {
   word-wrap: break-word;
   }
 
-  .active-cyan input[type=text] {
+  .active-cyan input[type=text]
+ {
       border: 0;
       border-radius: 0;
       border-bottom: 1px solid #FF6200;
@@ -92,8 +93,11 @@ body, html {
       box-shadow: 0 1px 0 0 #4dd0e1;
   }
 
-  .active-cyan .fa,
-  .active-cyan-2 .fa {
+  .active-cyan .fa{
+    color:#FF6200;
+  }
+    .active-cyan .fa:hover
+   {
       color: #4dd0e1;
   }
 
@@ -104,3 +108,6 @@ body, html {
 .input-group-btn{
   font-size: 1.6em;
 }
+
+table tbody { display:block; max-height:300px; overflow-y:auto; }
+table thead, table tbody tr { display:table; width:100%; table-layout:fixed; }
