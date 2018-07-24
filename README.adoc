@@ -53,6 +53,6 @@ npm run serve.coverage
 
 # npm run webdriver-update <- You will need to run this the first time
 webdriver-manager update # only first time
-webdriver-manager start
-npm run serve.e2e
-protractor .\protractor.conf.js
+webdriver-manager start # 1st window
+npm run serve.e2e     # 2nd window
+protractor .\protractor.conf.js # 3rd window
