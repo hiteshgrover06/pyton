@@ -14,7 +14,7 @@ export class SearchEngineService {
 
     constructor(private httpInterceptor: HttpInterceptor) { }
 
-    public GetGoogleResults = (queryText: string, startIndex: number = 99999999999999999999999999): Observable<any> => {
+    public GetGoogleResults = (queryText: string, startIndex: number = 1): Observable<any> => {
         const url = GoogleSearchEndPoint.replace('{0}', queryText).replace('{startIndex}', startIndex.toString());
         return this.httpInterceptor.get(url, null);
     }
