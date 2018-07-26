@@ -23,7 +23,10 @@ export function main() {
       async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         tcb.createAsync(TestComponent)
           .then((fixture) => {
+            fixture.detectChanges();
+
             expect(fixture.nativeElement.innerText.indexOf('HOME')).toEqual(9);
+            expect('test').toEqual('test');
           });
       })));
   });

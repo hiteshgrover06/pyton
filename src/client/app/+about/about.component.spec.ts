@@ -17,7 +17,7 @@ export function main() {
         tcb.createAsync(TestComponent)
           .then((rootTC: any) => {
             let aboutDOMEl = rootTC.debugElement.children[0].nativeElement;
-	          expect(getDOM().querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
+	          expect(getDOM().querySelectorAll(aboutDOMEl, 'h3')[0].textContent).toEqual('Thought Process');
           });
         }));
     });
